@@ -38,6 +38,7 @@ public class Main {
                 System.out.println("You win!");
                 break;
             }
+            drawHangman(hangman.getValidGuesses());
             System.out.println(hangman);
             try {
                 String guess = JOptionPane.showInputDialog("Guess a letter: ");
@@ -82,5 +83,36 @@ public class Main {
             System.out.println("You lose! The word was " + hangman.getSecretWord());
             return false;
         }
+    }
+
+    public static void drawHangman(int guessesLeft) {
+        System.out.println("  _______");
+        if (guessesLeft < 7) {
+            System.out.println("  |     |");
+        } else {
+            System.out.println("  |");
+        }
+        if (guessesLeft < 6) {
+            System.out.println("  |     O");
+        } else {
+            System.out.println("  |");
+        }
+        if (guessesLeft < 4) {
+            System.out.println("  |    /|\\");
+        } else if (guessesLeft < 5) {
+            System.out.println("  |    /|");
+        } else if (guessesLeft < 6) {
+            System.out.println("  |    /");
+        } else {
+            System.out.println("  |");
+        }
+        if (guessesLeft < 2) {
+            System.out.println("  |    / \\");
+        } else if (guessesLeft < 3) {
+            System.out.println("  |    /");
+        } else {
+            System.out.println("  |");
+        }
+        System.out.println("__|__");
     }
 }
