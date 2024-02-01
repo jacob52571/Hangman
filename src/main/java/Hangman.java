@@ -1,4 +1,4 @@
-import java.io.FileNotFoundException;
+import java.io.*;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class Hangman {
     private char[] dashesArray;
     private final String category;
 
-    public Hangman() throws FileNotFoundException {
+    public Hangman() throws FileNotFoundException, IOException {
         FileReader reader = new FileReader("src/main/java/puzzles.txt");
         Scanner file = new Scanner(reader);
         List<String> words = new ArrayList<>();
@@ -22,6 +22,21 @@ public class Hangman {
             words.add(word);
         }
         file.close();
+        FileReader reader2 = new FileReader("src/main/java/used.txt");
+        Scanner file2 = new Scanner(reader2);
+        List<String> usedWords = new ArrayList<>();
+        while (file2.hasNext()) {
+            String word = file2.nextLine();
+            usedWords.add(word);
+        }
+        file2.close();
+        for (String word : usedWords) {
+            words.remove(word);
+        }
+        if (words.size() == 0) {
+            System.out.println("No more words!");
+            System.exit(0);
+        }
         String[] split = words.get((int) (Math.random() * words.size())).split(":");
         this.category = split[0];
         this.secretWord = split[1];

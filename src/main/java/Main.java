@@ -1,9 +1,12 @@
 import javax.swing.*;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 // this code is messy but it works
 public class Main {
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws FileNotFoundException, IOException {
+        FileWriter writer = new FileWriter("src/main/java/used.txt", false);
+        writer.write("");
+        writer.close();
         int wins = 0;
         int losses = 0;
         while (true) {
@@ -26,7 +29,7 @@ public class Main {
         return false;
     }
 
-    public static boolean play() throws FileNotFoundException {
+    public static boolean play() throws FileNotFoundException, IOException {
         Hangman hangman = new Hangman();
         System.out.println("The category is: " + hangman.getCategory());
         while (hangman.getValidGuesses() != 0) {
@@ -69,6 +72,9 @@ public class Main {
             System.out.println("You have " + hangman.getValidGuesses() + " guesses left.");
         }
 
+        FileWriter writer = new FileWriter("src/main/java/used.txt", true);
+        writer.write(hangman.getCategory() + ":" + hangman.getSecretWord() + "\n");
+        writer.close();
         if (hangman.getGuessed()) {
             System.out.println("You win! The word was " + hangman.getSecretWord());
             return true;
