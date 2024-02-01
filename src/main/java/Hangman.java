@@ -14,7 +14,7 @@ public class Hangman {
     private final String category;
 
     public Hangman() throws FileNotFoundException {
-        FileReader reader = new FileReader("Scratch/src/puzzles.txt");
+        FileReader reader = new FileReader("src/main/java/puzzles.txt");
         Scanner file = new Scanner(reader);
         List<String> words = new ArrayList<>();
         while (file.hasNext()) {

@@ -70,7 +70,7 @@ public class Main {
         }
 
         if (hangman.getGuessed()) {
-            System.out.println("You win!");
+            System.out.println("You win! The word was " + hangman.getSecretWord());
             return true;
         } else {
             System.out.println("You lose! The word was " + hangman.getSecretWord());
