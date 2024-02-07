@@ -52,6 +52,8 @@ public class Main {
     public static boolean play() throws FileNotFoundException, IOException {
         // creates a new game
         Hangman hangman = new Hangman();
+        // message for JOP
+        String message = "";
         // prints the category
         System.out.println("The category is: " + hangman.getCategory());
         // checks if they have any guesses left
@@ -69,7 +71,9 @@ public class Main {
             System.out.println(hangman);
             // keep trying to get a valid guess
             try {
-                String guess = JOptionPane.showInputDialog("Guess a letter: ");
+                message += String.format("%s%nGuess a letter:", hangman.toString());
+                String guess = JOptionPane.showInputDialog(message);
+                message = "";
                 // if they cancel, stop asking them
                 if (guess == null) {
                     JOptionPane.showMessageDialog(null, "You quit the game.");
@@ -94,6 +98,7 @@ public class Main {
             if (same) {
                 hangman.useGuess();
                 System.out.println("That letter is not in the word.");
+                message += "That letter is not in the word.\n";
             }
             // if there aren't any more dashes, that means they won
             if (!hasDashes(newDashes)) {
@@ -102,6 +107,7 @@ public class Main {
                 break;
             }
             System.out.println("You have " + hangman.getValidGuesses() + " guesses left.");
+            message += "You have " + hangman.getValidGuesses() + " guesses left.\n";
         }
 
         // writes the word to the used.txt file so that it won't be shown in the same session
